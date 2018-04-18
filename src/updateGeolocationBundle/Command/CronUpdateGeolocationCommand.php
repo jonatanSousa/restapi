@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use ZipArchive;
+use Doctrine\Common\Cache\MemcacheCache;
+
 
 class CronUpdateGeolocationCommand extends ContainerAwareCommand
 {
