@@ -15,7 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $hasAtribute = 1 == 1 ? 'lalal' : false ;
+       /* $hasAtribute = 1 == 1 ? 'lalal' : false ;
 
         if(!$hasAtribute){
 
@@ -23,7 +23,7 @@ class DefaultController extends Controller
         } else {
 
             die('aquii'.$hasAtribute);
-        }
+        }*/
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [

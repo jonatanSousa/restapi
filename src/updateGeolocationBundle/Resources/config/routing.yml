@@ -1,0 +1,3 @@
+update_geolocation_homepage:
+    path:     /
+    defaults: { _controller: updateGeolocationBundle:Default:index }
