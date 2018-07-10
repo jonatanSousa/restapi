@@ -1,6 +1,8 @@
 # restapi
 symfony rest Api 
 
+this is intended to give a service that returns all postal codes and location from portugal 
+
 php bin/console server:start
 
 php  bin/console cron:updateGeolocation update
