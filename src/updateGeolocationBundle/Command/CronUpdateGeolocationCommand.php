@@ -15,7 +15,7 @@ class CronUpdateGeolocationCommand extends ContainerAwareCommand
     {
         $this
             ->setName('cron:updateGeolocation')
-            ->setDescription('updates post codes from remote UrL')
+            ->setDescription('updates post codes from remote UrL options: update; ')
             ->addArgument('argument', InputArgument::OPTIONAL, 'Argument description')
             ->addOption('update', null, InputOption::VALUE_NONE, 'Option description')
         ;
@@ -25,7 +25,7 @@ class CronUpdateGeolocationCommand extends ContainerAwareCommand
     {
         $argument = $input->getArgument('argument');
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        ini_set('memory_limit', '-1');
 
         if ($argument == 'update') {
 
@@ -59,22 +59,7 @@ class CronUpdateGeolocationCommand extends ContainerAwareCommand
 
                     $postCode = $data[14].'-'.$data[15];
 
-                    $RAW_QUERY = 'INSERT INTO codigos_postais_moradas  
-                        (
-                            post_code,
-                            city,
-                            street
-                        ) VALUES (
-                            "'.$postCode.'",
-                            "'.$data[16].'",
-                            "'.$rua.'"
-                        )';
-
-
-                    $statement = $em->getConnection()->prepare($RAW_QUERY);
-                    $statement->execute();
-
-
+                     $this->saveRow($postCode,$data[16],$rua);
                     //this sends to monolog
                     $output->writeln($id.' '.$postCode.' '.$rua."\n");
 
@@ -87,17 +72,23 @@ class CronUpdateGeolocationCommand extends ContainerAwareCommand
     }
 
 
-    protected function saveRow($postCode){
+    protected function saveRow($postCode, $city,  $street){
 
-   /*     $em = $this->getDoctrine()->getManager();
+        $em = $this->getContainer()->get('doctrine')->getManager();
 
-        $postCode->ge
-
-        $RAW_QUERY = 'SELECT * FROM my_table where my_table.field = 1 LIMIT 5;';
+        $RAW_QUERY = 'INSERT INTO codigos_postais_moradas  
+                        (
+                            post_code,
+                            city,
+                            street
+                        ) VALUES (
+                            "'.$postCode.'",
+                            "'.$city.'",
+                            "'.$street.'"
+                        )';
 
         $statement = $em->getConnection()->prepare($RAW_QUERY);
         $statement->execute();
-*/
     }
 
 }

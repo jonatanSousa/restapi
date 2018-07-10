@@ -23,7 +23,8 @@ class DefaultController extends Controller
         } else {
 
             die('aquii'.$hasAtribute);
-        }*/
+        }
+       */
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
